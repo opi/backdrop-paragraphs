@@ -1,6 +1,6 @@
 name = Paragraphs
 description = Paragraphs module to control your content flow.
-core = 7.x
+backdrop = 1.x
 package = Paragraphs
 
 dependencies[] = entity
