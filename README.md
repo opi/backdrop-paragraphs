@@ -40,7 +40,7 @@ Credits
 -------
 
 - Ported to Backdrop CMS by Steven Jackson (https://github.com/jacksinn).
-- Originally written for Drupal by Steven Jackson (https://github.com/jacksinn).
+- Originally written for Drupal by .VDMi (https://www.drupal.org/node/1290470).
 
 License
 -------
