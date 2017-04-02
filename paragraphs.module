@@ -1019,7 +1019,7 @@ function paragraphs_bundle_save($bundle) {
 
   paragraphs_bundle_load(NULL, TRUE);
   entity_info_cache_clear();
-  config_set('menu_rebuild_needed', TRUE);
+  config_set('paragraphs.config.json', 'menu_rebuild_needed', TRUE);
   return $status;
 }
 
@@ -1039,7 +1039,7 @@ function paragraphs_bundle_delete($bundle_machine_name) {
     paragraphs_bundle_load(NULL, TRUE);
     entity_info_cache_clear();
       //@todo variable set is deprecated, need to figure which of the other 'set's to use
-      config_set('menu_rebuild_needed', TRUE);
+      config_set('paragraphs.config.json','menu_rebuild_needed', TRUE);
   }
 }
 
