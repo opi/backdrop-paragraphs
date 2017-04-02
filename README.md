@@ -41,6 +41,9 @@ Credits
 
 - Ported to Backdrop CMS by Steven Jackson (https://github.com/jacksinn).
 - Originally written for Drupal by .VDMi (https://www.drupal.org/node/1290470).
+- Original Maintainer on Drupal.org Jeroen Bobbeldijk (https://www.drupal.org/u/jeroen.b).
+- Original Maintainer on Drupal.org Miro Dietiker (https://www.drupal.org/u/miro_dietiker).
+- Original Maintainer on Drupal.org Sascha Grossenbacher (https://www.drupal.org/u/berdir).
 
 License
 -------
