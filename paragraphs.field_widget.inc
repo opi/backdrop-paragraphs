@@ -63,7 +63,7 @@ function paragraphs_field_multiple_value_form($field, $instance, $langcode, $ite
   $description = field_filter_xss($instance['description']);
 
   $id_prefix = implode('-', array_merge($parents, array($field_name)));
-  $wrapper_id = drupal_html_id($id_prefix . '-add-more-wrapper');
+  $wrapper_id = backdrop_html_id($id_prefix . '-add-more-wrapper');
 
   $field_elements = array();
 
@@ -123,7 +123,7 @@ function paragraphs_field_multiple_value_form($field, $instance, $langcode, $ite
           'items' => $items,
           'delta' => $delta,
         );
-        drupal_alter(array('paragraphs_field_widget_form', 'paragraphs_field_widget_' . $instance['widget']['type'] . '_form'), $element, $form_state, $context);
+        backdrop_alter(array('paragraphs_field_widget_form', 'paragraphs_field_widget_' . $instance['widget']['type'] . '_form'), $element, $form_state, $context);
 
         $field_elements[$delta] = $element;
       }
@@ -311,8 +311,8 @@ function paragraphs_field_multiple_value_form($field, $instance, $langcode, $ite
   if (module_exists('file')) {
     // file.js triggers uploads when the main Submit button is clicked.
     $field_elements['#attached']['js'] = array(
-      drupal_get_path('module', 'file') . '/file.js',
-      array('data' => drupal_get_path('module', 'paragraphs') . '/paragraphs.js', 'type' => 'file', 'weight' => 9999),
+      backdrop_get_path('module', 'file') . '/file.js',
+      array('data' => backdrop_get_path('module', 'paragraphs') . '/paragraphs.js', 'type' => 'file', 'weight' => 9999),
     );
     $form_state['has_file_element'] = TRUE;
   }
@@ -348,7 +348,7 @@ function paragraphs_field_widget_form_build(&$form, &$form_state, $field, $insta
   // If the paragraph item form contains another paragraph,
   // we might ran into a recursive loop. Prevent that.
   if ($recursion++ > PARAGRAPHS_RECURSION_LIMIT) {
-    drupal_set_message(t('The paragraphs item form has not been embedded to avoid recursive loops.'), 'error');
+    backdrop_set_message(t('The paragraphs item form has not been embedded to avoid recursive loops.'), 'error');
     return $element;
   }
 
@@ -364,7 +364,7 @@ function paragraphs_field_widget_form_build(&$form, &$form_state, $field, $insta
   }
   elseif (isset($form_state['input']['_triggering_element_name'])) {
     if (strpos($form_state['input']['_triggering_element_name'], strtr($id_prefix, '-', '_') . '_add_more_add_more_bundle_') === 0) {
-      $bundle = substr($form_state['input']['_triggering_element_name'], drupal_strlen(strtr($id_prefix, '-', '_') . '_add_more_add_more_bundle_'));
+      $bundle = substr($form_state['input']['_triggering_element_name'], backdrop_strlen(strtr($id_prefix, '-', '_') . '_add_more_add_more_bundle_'));
     }
   }
 
@@ -710,7 +710,7 @@ function paragraphs_field_widget_embed_validate($element, &$form_state, $complet
           // Copied from _form_validate().
           if (isset($elements['#needs_validation'])) {
             $is_empty_multiple = (!count($elements['#value']));
-            $is_empty_string = (is_string($elements['#value']) && drupal_strlen(trim($elements['#value'])) == 0);
+            $is_empty_string = (is_string($elements['#value']) && backdrop_strlen(trim($elements['#value'])) == 0);
             $is_empty_value = ($elements['#value'] === 0);
             if ($is_empty_multiple || $is_empty_string || $is_empty_value) {
               if (isset($elements['#title'])) {
@@ -734,7 +734,7 @@ function paragraphs_field_widget_embed_validate($element, &$form_state, $complet
 
       // Load initial form values into $item, so any other form values below the
       // same parents are kept.
-      $item = drupal_array_get_nested_value($form_state['values'], $element['#parents']);
+      $item = backdrop_array_get_nested_value($form_state['values'], $element['#parents']);
 
       // Set the _weight if it is a multiple field.
       if (isset($element['_weight'])) {
@@ -759,7 +759,7 @@ function paragraphs_add_more_submit($form, &$form_state) {
   $button = $form_state['triggering_element'];
 
   // Go one level up in the form, to the widgets container.
-  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -2));
+  $element = backdrop_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -2));
   $field_name = $element['#field_name'];
   $langcode = $element['#language'];
   $parents = $element['#field_parents'];
@@ -790,7 +790,7 @@ function paragraphs_add_more_js($form, $form_state) {
   $button = $form_state['triggering_element'];
 
   // Go one level up in the form, to the widgets container.
-  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -2));
+  $element = backdrop_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -2));
   $field_name = $element['#field_name'];
   $langcode = $element['#language'];
   $parents = $element['#field_parents'];
@@ -826,7 +826,7 @@ function paragraphs_remove_submit($form, &$form_state) {
   $address = array_slice($button['#array_parents'], 0, -3);
 
   // Go one level up in the form, to the widgets container.
-  $parent_element = drupal_array_get_nested_value($form, $address);
+  $parent_element = backdrop_array_get_nested_value($form, $address);
   $field_name = $parent_element['#field_name'];
   $langcode = $parent_element['#language'];
   $parents = $parent_element['#field_parents'];
@@ -846,7 +846,7 @@ function paragraphs_remove_submit($form, &$form_state) {
   // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
   // the 3, the order of the two 3s now is undefined and may not match what
   // the user had selected.
-  $input = drupal_array_get_nested_value($form_state['input'], $address);
+  $input = backdrop_array_get_nested_value($form_state['input'], $address);
   // Sort by weight,
   // but first remove garbage values to ensure proper '_weight' sorting
   unset($input['add_more']);
@@ -860,7 +860,7 @@ function paragraphs_remove_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nested_value($form_state['input'], $address, $input);
+    backdrop_array_get_nested_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;
@@ -884,7 +884,7 @@ function paragraphs_edit_submit($form, &$form_state) {
   $address = array_slice($button['#array_parents'], 0, -3);
 
   // Go one level up in the form, to the widgets container.
-  $parent_element = drupal_array_get_nested_value($form, $address);
+  $parent_element = backdrop_array_get_nested_value($form, $address);
   $field_name = $parent_element['#field_name'];
   $langcode = $parent_element['#language'];
   $parents = $parent_element['#field_parents'];
@@ -904,7 +904,7 @@ function paragraphs_edit_submit($form, &$form_state) {
   // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
   // the 3, the order of the two 3s now is undefined and may not match what
   // the user had selected.
-  $input = drupal_array_get_nested_value($form_state['input'], $address);
+  $input = backdrop_array_get_nested_value($form_state['input'], $address);
   // Sort by weight,
   // but first remove garbage values to ensure proper '_weight' sorting
   unset($input['add_more']);
@@ -918,7 +918,7 @@ function paragraphs_edit_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nested_value($form_state['input'], $address, $input);
+    backdrop_array_get_nested_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;
@@ -942,7 +942,7 @@ function paragraphs_collapse_submit($form, &$form_state) {
   $address = array_slice($button['#array_parents'], 0, -3);
 
   // Go one level up in the form, to the widgets container.
-  $parent_element = drupal_array_get_nested_value($form, $address);
+  $parent_element = backdrop_array_get_nested_value($form, $address);
   $field_name = $parent_element['#field_name'];
   $langcode = $parent_element['#language'];
   $parents = $parent_element['#field_parents'];
@@ -963,7 +963,7 @@ function paragraphs_collapse_submit($form, &$form_state) {
   // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
   // the 3, the order of the two 3s now is undefined and may not match what
   // the user had selected.
-  $input = drupal_array_get_nested_value($form_state['input'], $address);
+  $input = backdrop_array_get_nested_value($form_state['input'], $address);
   // Sort by weight,
   // but first remove garbage values to ensure proper '_weight' sorting
   unset($input['add_more']);
@@ -977,7 +977,7 @@ function paragraphs_collapse_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nested_value($form_state['input'], $address, $input);
+    backdrop_array_get_nested_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;
@@ -1001,7 +1001,7 @@ function paragraphs_deleteconfirm_submit($form, &$form_state) {
   $address = array_slice($button['#array_parents'], 0, -3);
 
   // Go one level up in the form, to the widgets container.
-  $parent_element = drupal_array_get_nested_value($form, $address);
+  $parent_element = backdrop_array_get_nested_value($form, $address);
   $field_name = $parent_element['#field_name'];
   $langcode = $parent_element['#language'];
   $parents = $parent_element['#field_parents'];
@@ -1022,7 +1022,7 @@ function paragraphs_deleteconfirm_submit($form, &$form_state) {
   // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
   // the 3, the order of the two 3s now is undefined and may not match what
   // the user had selected.
-  $input = drupal_array_get_nested_value($form_state['input'], $address);
+  $input = backdrop_array_get_nested_value($form_state['input'], $address);
   // Sort by weight,
   // but first remove garbage values to ensure proper '_weight' sorting
   unset($input['add_more']);
@@ -1036,7 +1036,7 @@ function paragraphs_deleteconfirm_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nested_value($form_state['input'], $address, $input);
+    backdrop_array_get_nested_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;
@@ -1055,7 +1055,7 @@ function paragraphs_restore_submit($form, &$form_state) {
   $address = array_slice($button['#array_parents'], 0, -3);
 
   // Go one level up in the form, to the widgets container.
-  $parent_element = drupal_array_get_nested_value($form, $address);
+  $parent_element = backdrop_array_get_nested_value($form, $address);
   $field_name = $parent_element['#field_name'];
   $langcode = $parent_element['#language'];
   $parents = $parent_element['#field_parents'];
@@ -1077,7 +1077,7 @@ function paragraphs_restore_submit($form, &$form_state) {
   // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
   // the 3, the order of the two 3s now is undefined and may not match what
   // the user had selected.
-  $input = drupal_array_get_nested_value($form_state['input'], $address);
+  $input = backdrop_array_get_nested_value($form_state['input'], $address);
   // Sort by weight,
   // but first remove garbage values to ensure proper '_weight' sorting
   unset($input['add_more']);
@@ -1091,7 +1091,7 @@ function paragraphs_restore_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nested_value($form_state['input'], $address, $input);
+  drupal_array_set_nestedbackdrop_array_get_nested_value_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;

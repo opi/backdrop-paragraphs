@@ -597,7 +597,7 @@ function paragraphs_field_instance_settings_form($field, $instance) {
   if (!count($bundles)) {
     $element['allowed_bundles_explain'] = array(
       '#type' => 'markup',
-      '#markup' => t('You did not add any paragraph bundles yet, click !here to add one.', array('!here' => l(t('here'), 'admin/structure/paragraphs/add', array('query' => drupal_get_destination()))))
+      '#markup' => t('You did not add any paragraph bundles yet, click !here to add one.', array('!here' => l(t('here'), 'admin/structure/paragraphs/add', array('query' => backdrop_get_destination()))))
     );
   }
 
