@@ -335,7 +335,7 @@ function paragraphs_menu() {
 
   $items['admin/structure/paragraphs/add'] = array(
     'title' => 'Add Paragraph Bundle',
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('paragraphs_admin_bundle_form'),
     'access arguments' => array('administer paragraphs bundles'),
     'type' => MENU_LOCAL_ACTION,
@@ -346,7 +346,7 @@ function paragraphs_menu() {
     'title' => 'Edit paragraph bundle',
     'title callback' => 'paragraphs_bundle_title_callback',
     'title arguments' => array(3),
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('paragraphs_admin_bundle_form', 3),
     'access arguments' => array('administer paragraphs bundles'),
     'file' => 'paragraphs.admin.inc',
@@ -359,7 +359,7 @@ function paragraphs_menu() {
 
   $items['admin/structure/paragraphs/%paragraphs_bundle/delete'] = array(
     'title' => 'Delete Paragraph Bundle',
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('paragraphs_admin_bundle_delete_form', 3),
     'access arguments' => array('administer paragraphs bundles'),
     'file' => 'paragraphs.admin.inc',
@@ -457,7 +457,7 @@ function paragraphs_bundle_settings_form_submit($form, &$form_state) {
   $bundle_weights = array();
   if (isset($form_state['values']['instance']['settings']['allowed_bundles_table'])) {
     $bundle_settings_table = $form_state['values']['instance']['settings']['allowed_bundles_table'];
-    uasort($bundle_settings_table, 'drupal_sort_weight');
+    uasort($bundle_settings_table, 'backdrop_sort_weight');
     foreach ($bundle_settings_table as $machine_name => $value) {
       $bundle_settings[$machine_name] = (($value['enabled'] === 1) ? $machine_name : -1);
       $bundle_weights[$machine_name] = $value['weight'];
@@ -636,7 +636,7 @@ function theme_paragraphs_bundle_settings_form($variables) {
 
     // Before we add our 'weight' column to the row, we need to give the
     // element a custom class so that it can be identified in the
-    // drupal_add_tabledrag call.
+    // backdrop_add_tabledrag call.
     //
     // This could also have been done during the form declaration by adding
     // '#attributes' => array('class' => 'example-item-weight'),
@@ -645,7 +645,7 @@ function theme_paragraphs_bundle_settings_form($variables) {
 
     // We are now ready to add each element of our $form data to the $rows
     // array, so that they end up as individual table cells when rendered
-    // in the final table.  We run each element through the drupal_render()
+    // in the final table.  We run each element through the backdrop_render()
     // function to generate the final html markup for that element.
     $rows[] = array(
       'data' => array(
@@ -669,7 +669,7 @@ function theme_paragraphs_bundle_settings_form($variables) {
   // matches the final column count for your table.
   $header = array(t('Bundle'), t('Weight'));
 
-  // We also need to pass the drupal_add_tabledrag() function an id which will
+  // We also need to pass the backdrop_add_tabledrag() function an id which will
   // be used to identify the <table> element containing our tabledrag form.
   // Because an element's 'id' should be unique on a page, make sure the value
   // you select is NOT the same as the form ID used in your form declaration.
@@ -687,7 +687,7 @@ function theme_paragraphs_bundle_settings_form($variables) {
   // And then render any remaining form elements (such as our submit button).
   $output = backdrop_render_children($form);
 
-  // We now call the drupal_add_tabledrag() function in order to add the
+  // We now call the backdrop_add_tabledrag() function in order to add the
   // tabledrag.js goodness onto our page.
   //
   // For a basic sortable table, we need to pass it:
