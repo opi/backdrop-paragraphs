@@ -1,6 +1,6 @@
 name = Paragraphs Bundle Permissions
 description = Add view / create / update / delete permissions for all paragraph bundles.
-core = 7.x
+backdrop = 1.x
 package = Paragraphs
 
 dependencies[] = paragraphs
