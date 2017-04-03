@@ -14,7 +14,7 @@
  * output by doing a replace command on the id of the entire form element.
  */
 function paragraphs_edit_js() {
-  // drupal_html_id() very helpfully ensures that all html IDS are unique
+  // backdrop_html_id() very helpfully ensures that all html IDS are unique
   // on a page. Unfortunately what it doesn't realize is that the IDs
   // we are generating are going to replace IDs that already exist, so
   // this actually works against us.
@@ -56,7 +56,7 @@ function paragraphs_edit_js() {
  * output by doing a replace command on the id of the entire form element.
  */
 function paragraphs_collapse_js() {
-  // drupal_html_id() very helpfully ensures that all html IDS are unique
+  // backdrop_html_id() very helpfully ensures that all html IDS are unique
   // on a page. Unfortunately what it doesn't realize is that the IDs
   // we are generating are going to replace IDs that already exist, so
   // this actually works against us.
@@ -98,7 +98,7 @@ function paragraphs_collapse_js() {
  * output by doing a replace command on the id of the entire form element.
  */
 function paragraphs_remove_js() {
-  // drupal_html_id() very helpfully ensures that all html IDS are unique
+  // backdrop_html_id() very helpfully ensures that all html IDS are unique
   // on a page. Unfortunately what it doesn't realize is that the IDs
   // we are generating are going to replace IDs that already exist, so
   // this actually works against us.
@@ -141,7 +141,7 @@ function paragraphs_remove_js() {
  * output by doing a replace command on the id of the entire form element.
  */
 function paragraphs_deleteconfirm_js() {
-  // drupal_html_id() very helpfully ensures that all html IDS are unique
+  // backdrop_html_id() very helpfully ensures that all html IDS are unique
   // on a page. Unfortunately what it doesn't realize is that the IDs
   // we are generating are going to replace IDs that already exist, so
   // this actually works against us.
@@ -183,7 +183,7 @@ function paragraphs_deleteconfirm_js() {
  * output by doing a replace command on the id of the entire form element.
  */
 function paragraphs_restore_js() {
-  // drupal_html_id() very helpfully ensures that all html IDS are unique
+  // backdrop_html_id() very helpfully ensures that all html IDS are unique
   // on a page. Unfortunately what it doesn't realize is that the IDs
   // we are generating are going to replace IDs that already exist, so
   // this actually works against us.

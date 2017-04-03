@@ -1091,7 +1091,7 @@ function paragraphs_restore_submit($form, &$form_state) {
     }
   }
 
-  drupal_array_set_nestedbackdrop_array_get_nested_value_value($form_state['input'], $address, $input);
+  backdrop_array_get_nested_value($form_state['input'], $address, $input);
   field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
 
   $form_state['rebuild'] = TRUE;
