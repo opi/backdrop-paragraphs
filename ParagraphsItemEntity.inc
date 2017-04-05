@@ -8,8 +8,28 @@
  * Class for paragraphs_item entities.
  */
 class ParagraphsItemEntity extends Entity {
+    public function id()
+    {
+        // TODO: Implement id() method.
+    }
 
-  /**
+    public function entityType()
+    {
+        // TODO: Implement entityType() method.
+    }
+
+    public function label()
+    {
+        // TODO: Implement label() method.
+    }
+
+    public function uri()
+    {
+        // TODO: Implement uri() method.
+    }
+
+
+    /**
    * paragraphs field info.
    *
    * @var array
