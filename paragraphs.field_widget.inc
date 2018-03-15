@@ -191,13 +191,14 @@ function paragraphs_field_multiple_value_form($field, $instance, $langcode, $ite
         $entity_shell = entity_create('paragraphs_item', array('bundle' => $machine_name, 'field_name' => $field_name));
         $entity_shell->setHostEntity($original_element['#entity_type'], $original_element['#entity'], $langcode, FALSE);
 
-        if (!entity_access('create', 'paragraphs_item', $entity_shell)) {
-          unset($select_bundles[$machine_name]);
-          $removed_a_bundle = TRUE;
-        }
-        elseif (isset($instance['settings']['bundle_weights'][$machine_name])) {
+        // if (!entity_access('create', 'paragraphs_item', $entity_shell)) {
+        //   unset($select_bundles[$machine_name]);
+        //   $removed_a_bundle = TRUE;
+        // }
+        // elseif (isset($instance['settings']['bundle_weights'][$machine_name])) {
+        //     $select_bundles[$machine_name]['weight'] = $instance['settings']['bundle_weights'][$machine_name];
+        // }
             $select_bundles[$machine_name]['weight'] = $instance['settings']['bundle_weights'][$machine_name];
-        }
         $weight++;
       }
 

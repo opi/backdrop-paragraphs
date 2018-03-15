@@ -230,10 +230,10 @@ class ParagraphsItemEntity extends Entity {
     }
     // We are create a new paragraphs for a non-default entity, thus
     // set archived to TRUE.
-    if (!entity_revision_is_default($entity_type, $entity)) {
-      $this->hostEntityId = FALSE;
-      $this->archived = TRUE;
-    }
+    // if (!entity_revision_is_default($entity_type, $entity)) {
+    //   $this->hostEntityId = FALSE;
+    //   $this->archived = TRUE;
+    // }
     if ($create_link) {
       $entity->{$this->field_name}[$this->langcode][] = array('entity' => $this);
     }
